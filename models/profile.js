@@ -9,6 +9,6 @@ const Profile = new Schema(
     bookmarked_eateries: [{ type: Schema.Types.ObjectId, ref: 'Eatery' }]
   },
   { timestamps: true }
-);
+)
 
 module.exports = Profile

@@ -19,7 +19,6 @@ const main = async () => {
   const users = [
     {
         username: "CloudATL",
-        _id: "CloudATL",
         email: "mm@fake.com",
         password: "1234"
     },

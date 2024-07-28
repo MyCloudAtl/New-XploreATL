@@ -6,6 +6,6 @@ const Location = new Schema(
     state: { type: String, maxlength: 100, required: true }
   },
   { timestamps: true }
-);
+)
 
 module.exports = Location

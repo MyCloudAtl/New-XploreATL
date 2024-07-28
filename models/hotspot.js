@@ -25,6 +25,6 @@ const Hotspot = new Schema(
     description: { type: String, default: 'no description' }
   },
   { timestamps: true }
-);
+)
 
 module.exports = Hotspot

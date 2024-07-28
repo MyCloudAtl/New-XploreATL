@@ -22,10 +22,10 @@ const main = async () => {
     const profiles = [
       {
         user_id: user[0]._id,
-        favorite_eateries: '',
-        favorite_hotspots: '',
-        bookmarked_hotspots: '',
-        bookmarked_eateries: '',
+        favorite_eateries: [],
+        favorite_hotspots: [],
+        bookmarked_hotspots: [],
+        bookmarked_eateries: [],
       },
   ]
    
