@@ -16,7 +16,7 @@ const Hotspot = new Schema(
     zip_code: { type: String, maxlength: 20, required: true },
     phone_number: { type: String, maxlength: 20, required: false },
     website: { type: String, required: false },
-    operations_hours: { type: String, required: false },
+    operation_hours: { type: String, required: false },
     price_range: {
       type: String,
       enum: ['$-$$', '$$-$$$', '$$$-$$$$'],
