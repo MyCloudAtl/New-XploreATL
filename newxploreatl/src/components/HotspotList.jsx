@@ -9,7 +9,7 @@ export default function HotspotList() {
   useEffect(() => {
       const eateriesData = async () => {
           try {
-              const response = await axios.get('http://localhost:8000/hotspots/')
+              const response = await axios.get('http://localhost:3003/hotspots')
               console.log('Hotspots data:', response.data);
               if (response.status !== 200) {
                   throw new Error('Not working')

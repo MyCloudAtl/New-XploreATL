@@ -9,7 +9,7 @@ export default function EateryList() {
     useEffect(() => {
         const eateriesData = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/eateries/')
+                const response = await axios.get('http://localhost:3003/eateries')
                 console.log('Eateries data:', response.data);
                 if (response.status !== 200) {
                     throw new Error('Not working')
@@ -35,7 +35,7 @@ export default function EateryList() {
              <h3>Website: {eatery.website}</h3>
              <h4>Address: {eatery.address}, {eatery.city}, {eatery.state}, {eatery.zip_code}</h4>
              <h4>Phone: {eatery.phone_number}</h4>
-             <h4>Operation Hours: {eatery.operations_hours}</h4>
+             <h4>Operation Hours: {eatery.operation_hours}</h4>
              <h4>Price Range: {eatery.price_range}</h4>
              <p>Description: {eatery.description}</p>
            </div>

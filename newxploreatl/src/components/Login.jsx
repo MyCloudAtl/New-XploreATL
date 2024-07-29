@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
-    let navigate = useNavigate();
+    let navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('')
@@ -18,8 +18,8 @@ const Login = () => {
       } catch (error) {
          setMessage('Login failed');
           console.error('Error:', error);
-          }
-        };
+          } console.log(response)
+        }
     return (
       <div>
       <h2>Login</h2>

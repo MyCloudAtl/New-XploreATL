@@ -13,11 +13,11 @@ export default function SideBar() {
   const navigate = useNavigate()
 
 
-useEffect(() => {
+// useEffect(() => {
     const getUser = async () => {
       try {
         console.log("User ID:", id)
-          const response = await axios.get('http://localhost:3003/sers/')
+          const response = await axios.get('http://localhost:3003/users')
           setUser(response.data)
           console.log(user)
           setLoading(false)
@@ -26,6 +26,7 @@ useEffect(() => {
           setLoading(false)
       }
   }
+  useEffect(() => {
   getUser()
 }, [id])
   if (loading) {
@@ -56,7 +57,7 @@ return (
   <div className="Sidebar">
       {/* {user ? ( */}
         <div className='UserLink'>
-          <h1 className="Greeting">Nice to have you back, {username}</h1>
+          <h1 className="Greeting">Nice to have you back, {user ? user.username : 'Guest'}</h1>
           {/* <div className="Logout">
             <Link to="/logout">Logout</Link>
           </div> */}
