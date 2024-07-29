@@ -18,6 +18,10 @@ const main = async () => {
 
   const locations = [
     {
+        county: "Clayton",
+        state: "GA",
+    },
+    {
         county: "Cherokee",
         state: "GA",
     },
@@ -26,27 +30,11 @@ const main = async () => {
         state: "GA",
     },
     {
-        county: "Douglas",
-        state: "GA",
-    },
-    {
-        county: "Forsyth",
-        state: "GA",
-    },
-    {
-        county: "Gwinnett",
-        state: "GA",
-    },
-    {
-        county: "Rockdale",
-        state: "GA",
-    },
-    {
-        county: "Clayton",
-        state: "GA",
-    },
-    {
         county: "Dekalb",
+        state: "GA",
+    },
+    {
+        county: "Douglas",
         state: "GA",
     },
     {
@@ -54,11 +42,23 @@ const main = async () => {
         state: "GA",
     },
     {
+        county: "Forsyth",
+        state: "GA",
+    },
+    {
         county: "Fulton",
         state: "GA",
     },
     {
+        county: "Gwinnett",
+        state: "GA",
+    },
+    {
         county: "Henry",
+        state: "GA",
+    },
+    {
+        county: "Rockdale",
         state: "GA",
     },
 ]

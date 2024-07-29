@@ -121,3 +121,13 @@ body{
 a {
   padding-bottom: 1px;
 }
+.Locations{
+  display: flex;
+  flex-direction: column;
+  margin:0;
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+}

@@ -9,7 +9,7 @@ export default function Locations() {
       const locationsData = async () => {
           try {
               const response = await axios.get('http://localhost:3003/locations/')
-              console.log('Locations data:', response.data);
+            //   console.log('Locations data:', response.data);
               if (response.status !== 200) {
                   throw new Error('Not working')
               }
@@ -27,15 +27,8 @@ export default function Locations() {
         <ul>
        {locations.map(location => (
           <li key={location.id}>
-           <img src={location.image} alt={location.name} />
            <div>
-             <h2>Name: {location.name}</h2>
-             <h3>Website: {location.website}</h3>
-             <h4>Address: {location.address}, {location.city}, {location.state}, {location.zip_code}</h4>
-             <h4>Phone: {location.phone_number}</h4>
-             <h4>Operation Hours: {location.operations_hours}</h4>
-             <h4>Price Range: {location.price_range}</h4>
-             <p>Description: {location.description}</p>
+             <h4>{location.county}</h4>
            </div>
          </li>
        ))}
