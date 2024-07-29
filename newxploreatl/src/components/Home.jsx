@@ -1,35 +1,116 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { Link, useParams } from 'react-router-dom'
-import NavBar from './NavBar'
-import Footer from './Footer'
-import SideBar from './SideBar'
-import Locations from './Locations'
+// import React, { useState, useEffect } from 'react'
+// import axios from 'axios'
+// import { Link, useParams } from 'react-router-dom'
+// import NavBar from './NavBar'
+// import Footer from './Footer'
+// // import SideBar from './SideBar'
+// import Locations from './Locations'
 
 
-export default function Home() {
-  const { id } = useParams()
+// export default function Home() {
+//   const { id } = useParams()
+//   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(true)
 
-  return (
-    <div className="Home">
+//   useEffect(() => {
+//   const getUser = async () => {
+//     try {
+//         const userId = localStorage.getItem('userId');
+//         if (!userId) {
+//             throw new Error('User not logged in');
+//         }
+//         const response = await axios.get(`http://localhost:3003/users/${userId}`)
+//         console.log(response)
+//         setUser(response.data)
+//         setLoading(false)
+//     } catch (error) {
+//         console.error('Error fetching user data:', error)
+//         setLoading(false)
+//     }console.log('User ID:', userId);
+// };
 
-      <div className="Main">
-        <header className="Header">
-          <h1>XploreATL</h1>
-          {<Locations />}
-        </header>
-        <div className='Body'>
-          <nav className='Nav'>
-          {<NavBar />}
-          </nav>
+//     // useEffect(() => {
+//       getUser();
+// }, [])
+
+// if (loading) {
+//     return <p>Loading...</p>;
+// }
+
+//   return (
+//     <div className="Home">
+//       <div className="Main">
+//         <header className="Header">
+//           <h1>XploreATL</h1>
+// <h2 className="Greeting">Nice to have you back, {user?.username ||'Guest'}</h2>
+//           {<Locations />}
+//         </header>
+//         <div className='Body'>
+//           <nav className='Nav'>
+//           {<NavBar />}
+//           </nav>
+//         </div>
+//         {/* <main className='Side'>
+//           {<SideBar/>}
+//         </main> */}
+//       </div>
+//       <div className='Footer'>
+//         <Footer />
+//       </div>
+//     </div>
+//   )
+// } 
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
+import NavBar from './NavBar';
+import Footer from './Footer';
+import Locations from './Locations';
+
+const Home = () => {
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+                const response = await axios.get('http://localhost:3003/users/');
+                console.log(response);
+                setUser(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                setLoading(false);
+            }
+        };
+
+        getUser();
+    }, []);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+
+    return (
+        <div className="Home">
+            <div className="Main">
+                <header className="Header">
+                    <h1>XploreATL</h1>
+                    <h2 className="Greeting">Nice to have you back, {user?.username || 'Guest'}</h2>
+                    <Locations />
+                </header>
+                <div className='Body'>
+                    <nav className='Nav'>
+                        <NavBar />
+                    </nav>
+                </div>
+            </div>
+            <div className='Footer'>
+                <Footer />
+            </div>
         </div>
-        <main className='Side'>
-          {<SideBar/>}
-        </main>
-      </div>
-      <div className='Footer'>
-        <Footer />
-      </div>
-    </div>
-  )
-} 
+    );
+};
+
+export default Home;

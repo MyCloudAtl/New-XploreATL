@@ -1,27 +1,48 @@
-const express = require('express')
-const db = require('./db')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const db = require('./db')
+const express = require('express')
+const session = require('express-session')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
 const eateryController = require('./controllers/eateryController')
 const userController = require('./controllers/userController')
 const hotspotController = require('./controllers/hotspotController')
 const locationController = require('./controllers/locationController')
 const profileController = require('./controllers/profileController')
-const ratingController = require('./controllers/ratingController')
 const logger = require('morgan')
 const PORT = process.env.PORT || 3003
 const app = express()
 const { User } = require('./models')
 
-app.use(express.json())
 app.use(cors({credentials: true, origin:'http://localhost:5173'}))
-app.use(bodyParser.json())
+
+app.use(bodyParser.urlencoded({ extended: true }))
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 app.use(logger('dev'))
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+app.use(bodyParser.json())
+
+app.use(session({
+    secret: 'your secret key',
+    resave: false,
+    saveUninitialized: false,
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+db.on('error', console.error.bind(console, 'MongoDB connection error'))
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
   })
+
+app.get('/', (req, res) => {
+    res.send('This is our root page!')
+})
 
 app.get('/users', userController.getAllUser)
 app.get('/users/:id', userController.getUserById)
@@ -53,19 +74,14 @@ app.post('/profiles', profileController.createProfile)
 app.put('/profiles/:id', profileController.updateProfile)
 app.delete('/profiles/:id', profileController.deleteProfile)
 
-app.get('/ratings', ratingController.getAllRating)
-app.get('/ratings/:id', ratingController.getRatingById)
-app.post('/ratings', ratingController.createRating)
-app.put('/ratings/:id', ratingController.updateRating)
-app.delete('/ratings/:id', ratingController.deleteRating)
-
- app.get('/currentUser', (req, res) => {
-    res.json(req.user);
-  })
+app.get('/currentUser', (req, res) => {
+    console.log("req:" + req.user)
+    res.json(req.user)
+})
 
 //User Resources
 app.post('/register', async (req, res) => {
-    const { username, password, email} = req.body
+    const { username, email, password } = req.body
     try {
         const user = new User({ username, email })
         await User.register(user, password);
@@ -82,27 +98,44 @@ app.post('/logout', (req, res) => {
         res.status(200).send({ message: 'Logout successful' })
     })
 })
-app.post('/login', (req, res) => {
+app.post('/login', passport.authenticate('local'), (req, res) => {
     console.log("Login successful")
     res.status(200).send({ message: 'Login successful' })
 })
+app.post('/login', async (req, res) => {
+    try {
+      const { username, password } = req.body;
+  
+      // Find the user
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res.status(401).json({ message: 'User not found' });
+      }
+  
+      // Check password (assuming you have some method to validate it)
+      const isMatch = await user.comparePassword(password); // Example method
+      if (!isMatch) {
+        return res.status(401).json({ message: 'Invalid credentials' });
+      }
+  
+      // Successful login logic here
+      res.status(200).json({ message: 'Login successful' });
+    } catch (error) {
+      console.error('Error during login:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+  
 app.delete('/users/:id', async (req, res) => {
     const userId = req.params.id
+    const { username, password } = req.body;
     try {
-        const result = await User.findByIdAndDelete(userId)
-        if (!result) {
-            return res.status(404).json({ message: 'User not found' })
-        }
-        res.status(200).json({ message: 'Account deleted successfully' })
+        await User.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: 'Account deleted successfully' });
     } catch (error) {
-        console.error('Error deleting user:', error)
-        res.status(500).json({ message: 'Failed to delete account', error })
+        console.error('Error deleting user:', error);
+        res.status(500).json({ message: 'Failed to delete account', error });
     }
-})
-
-
-app.get('/', (req, res) => {
-  res.send('This is our root page!')
 })
 
 app.get('*', (req,res) => res.send('404 page not found'))
