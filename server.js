@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3003
 const app = express()
 const { User } = require('./models')
 
+app.use(express.json())
 app.use(cors({credentials: true, origin:'http://localhost:5173'}))
 app.use(bodyParser.json())
 app.use(logger('dev'))
@@ -58,10 +59,13 @@ app.post('/ratings', ratingController.createRating)
 app.put('/ratings/:id', ratingController.updateRating)
 app.delete('/ratings/:id', ratingController.deleteRating)
 
+ app.get('/currentUser', (req, res) => {
+    res.json(req.user);
+  })
 
 //User Resources
 app.post('/register', async (req, res) => {
-    const { username, email, password } = req.body
+    const { username, password, email} = req.body
     try {
         const user = new User({ username, email })
         await User.register(user, password);
@@ -78,7 +82,7 @@ app.post('/logout', (req, res) => {
         res.status(200).send({ message: 'Logout successful' })
     })
 })
-app.post('/login', passport.authenticate('local'), (req, res) => {
+app.post('/login', (req, res) => {
     console.log("Login successful")
     res.status(200).send({ message: 'Login successful' })
 })
