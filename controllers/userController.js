@@ -27,7 +27,7 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
-        const newObject = await new User(req.body)
+        const newObject = await User(req.body)
         await newObject.save()
         return res.status(201).json({
             newObject,

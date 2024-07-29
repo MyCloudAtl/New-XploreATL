@@ -13,6 +13,9 @@ const PORT = process.env.PORT || 3003
 const app = express()
 const { User } = require('./models')
 
+app.use(cors({credentials: true, origin:'http://localhost:5173'}))
+
+
 app.get('*', (req,res) => res.send('404 page not found'))
 
 module.exports = app
