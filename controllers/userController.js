@@ -1,4 +1,4 @@
-const {User} = require('../models')
+const {User, Eatery, Hotspot } = require('../models')
 
 //Read
 const getAllUser = async (req, res) => {
@@ -72,10 +72,71 @@ const deleteUser = async (req, res) => {
     }
 }
 
+// Like an Eatery
+const likeEatery = async (req, res) => {
+  try {
+    const { userId, eateryId } = req.params
+    const user = await User.findById(userId)
+    if (!user.likedEateries.includes(eateryId)) {
+      user.likedEateries.push(eateryId)
+      await user.save()
+    }
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(500).send(error.message)
+  }
+};
+
+// Unlike an Eatery
+const unlikeEatery = async (req, res) => {
+  try {
+    const { userId, eateryId } = req.params
+    const user = await User.findById(userId)
+    user.likedEateries.pull(eateryId)
+    await user.save();
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(500).send(error.message)
+  }
+};
+
+// Like a Hotspot
+const likeHotspot = async (req, res) => {
+  try {
+    const { userId, hotspotId } = req.params
+    const user = await User.findById(userId)
+    if (!user.likedHotspots.includes(hotspotId)) {
+      user.likedHotspots.push(hotspotId)
+      await user.save()
+    }
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(500).send(error.message)
+  }
+};
+
+// Unlike a Hotspot
+const unlikeHotspot = async (req, res) => {
+  try {
+    const { userId, hotspotId } = req.params
+    const user = await User.findById(userId)
+    user.likedHotspots.pull(hotspotId)
+    await user.save()
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(500).send(error.message)
+  }
+}
+
+
 module.exports = {
     getAllUser, 
     getUserById, 
     createUser, 
     updateUser, 
-    deleteUser
+    deleteUser,
+    likeEatery,
+    unlikeEatery,
+    likeHotspot,
+    unlikeHotspot
 }

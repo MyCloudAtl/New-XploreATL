@@ -81,31 +81,34 @@ app.delete('/profiles/:id', profileController.deleteProfile)
 //     console.log("req:" + req.user)
 //     const user = req.user
 //     if (!user) {
-//         return res.status(401).json({ message: 'Unauthorized' });
+//         return res.status(401).json({ message: 'Unauthorized' })
 //     }
 
 //     try {
-//         const userProfile = await Profile.findOne({ user_id: user._id });
+//         const userProfile = await Profile.findOne({ user_id: user._id })
 //         res.json({ user, userProfile });
 //     } catch (error) {
-//         res.status(500).json({ message: 'Server error', error });
+//         res.status(500).json({ message: 'Server error', error })
 //     }
 // })
 
-app.get('/currentUser', async (req, res) => {
-    const userProfile = await Profile.findOne({user_id : req.user.id})
-    //(user_id)
-    const user = req.user
-    res.json({user, userProfile})
-})
+// app.get('/currentUser', async (req, res) => {
+//     const userProfile = await Profile.findOne({user_id : req.user.id})
+//     //(user_id)
+//     const user = req.user
+//     res.json({user, userProfile})
+// })
 
+app.get('/currentUser', (req, res) => {
+    console.log("req:" + req.user)
+    res.json(req.user)
+})
 //User Resources
 app.post('/register', async (req, res) => {
     const { username, email, password } = req.body
     try {
         const user = new User({ username, email })
         await User.register(user, password)
-        // await user.save()
         const profile = new Profile({user_id: user._id})
         profile.save()
         res.status(201).send({ message: 'Registration successful', user })

@@ -59,10 +59,12 @@ choiceData ()
         favorite_eateries: [...profile.favorite_eateries, nameToId[selectedEatery]],
         favorite_hotspots: [...profile.favorite_hotspots, nameToId[selectedHotspot]],
       };
-
+      console.log(updatedProfile)
       try {
         const response = await axios.put(`http://localhost:3003/profiles/${profile.user_id}`, updatedProfile, { withCredentials: true });
+        console.log(updatedProfile)
         setProfile(response.data);
+        console.log(profile)
         console.log('Profile updated successfully');
       } catch (error) {
         console.error('Error updating profile', error);
