@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import NavBar from './NavBar'
 import { Link } from 'react-router-dom'
+// import { UserContext } from '../context/UserContext'
 
 export default function EateryList() {
     const [eateries, setEateries] = useState([])
+    // const { user } = useContext(UserContext)
 
     useEffect(() => {
         const eateriesData = async () => {
@@ -19,8 +21,16 @@ export default function EateryList() {
                 console.error('Error grabbing eateries', error)
             }
         };
-    eateriesData ();
-    }, []);
+    eateriesData ()
+    }, [])
+
+    // const handleLike = async (eateryId) => {
+    //   await axios.post(`/api/users/${user._id}/likeEatery/${eateryId}`)
+    // };
+  
+    // const handleUnlike = async (eateryId) => {
+    //   await axios.post(`/api/users/${user._id}/unlikeEatery/${eateryId}`)
+    // } 
 
   return (
     <div className="EateryList">
