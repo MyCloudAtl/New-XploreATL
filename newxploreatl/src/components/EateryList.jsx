@@ -19,8 +19,21 @@ export default function EateryList() {
                 console.error('Error grabbing eateries', error)
             }
         };
-    eateriesData ();
-    }, []);
+    eateriesData ()
+    }, [])
+
+
+    const handleLike = async (eateryId) => {
+      await axios.post(`http://localhost:3003/users/${user._id}/likeEatery/${eateryId}`)
+      const response = await axios.get(`http://localhost:3003/users/${user._id}`)
+      setUser(response.data)
+    };
+    
+    const handleUnlike = async (eateryId) => {
+      await axios.post(`http://localhost:3003/users/${user._id}/unlikeEatery/${eateryId}`)
+      const response = await axios.get(`http://localhost:3003/users/${user._id}`)
+    setUser(response.data)
+    } 
 
   return (
     <div className="EateryList">
@@ -38,6 +51,11 @@ export default function EateryList() {
              <h4>Operation Hours: {eatery.operation_hours}</h4>
              <h4>Price Range: {eatery.price_range}</h4>
              <p>Description: {eatery.description}</p>
+             {user?.likedEateries.includes(eatery._id) ? (
+            <button onClick={() => handleUnlike(eatery._id)}>Unlike</button>
+          ) : (
+            <button onClick={() => handleLike(eatery._id)}>Like</button>
+          )}
            </div>
          </li>
        ))}

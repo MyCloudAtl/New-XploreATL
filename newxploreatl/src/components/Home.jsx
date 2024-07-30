@@ -77,8 +77,8 @@ const Home = ({user, setUser, profile, setProfile}) => {
     const getUser = async () => {
         try {
             const response = await axios.get('http://localhost:3003/currentUser', { withCredentials: true })
-            console.log(response.data)
-            setUser(response.data.user);
+            console.log('response: ', response.data);
+            setUser(response.data);
             // setProfile(response.data.userProfile)
             setLoading(false)
         } catch (error) {
