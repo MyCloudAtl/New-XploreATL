@@ -70,31 +70,32 @@ export default function EateryList() {
       }
     }
 
+// Reference - https://stackoverflow.com/questions/50709625/link-with-target-blank-and-rel-noopener-noreferrer-still-vulnerable
   return (
     <div className="EateryList">
-        {<NavBar />}
-        <h1>EateryList</h1>
-        <ul>
-       {eateries.map(eatery => (
-          <li key={eatery.id}>
-           <img src={eatery.image} alt={eatery.name} />
-           <div>
-             <h2>Name: {eatery.name}</h2>
-             <h3>Website: {eatery.website}</h3>
-             <h4>Address: {eatery.address}, {eatery.city}, {eatery.state}, {eatery.zip_code}</h4>
-             <h4>Phone: {eatery.phone_number}</h4>
-             <h4>Operation Hours: {eatery.operation_hours}</h4>
-             <h4>Price Range: {eatery.price_range}</h4>
-             <p>Description: {eatery.description}</p>
-             {user && user.likedEateries && user.likedEateries.includes(eatery._id) ? (
-            <button onClick={() => handleUnlike(eatery._id)}>Unlike</button>
-          ) : (
-            <button onClick={() => handleLike(eatery._id)}>Like</button>
-          )}
-           </div>
-         </li>
-       ))}
-     </ul>
-    </div>
-  )
+    <NavBar />
+    <h1>EateryList</h1>
+    <ul className="eatery-list">
+        {eateries.map(eatery => (
+            <li key={eatery._id} className="eatery-item">
+                <img src={eatery.image} alt={eatery.name} width="250" height="250" />
+                <div className="eatery-details">
+                    <h2>{eatery.name}</h2>
+                    <h3>Website: <a href={eatery.website} target="_blank" rel="noopener noreferrer">{eatery.website}</a></h3>
+                    <h4>Address: {eatery.address}, {eatery.city}, {eatery.state}, {eatery.zip_code}</h4>
+                    <h4>Phone: {eatery.phone_number}</h4>
+                    <h4>Operation Hours: {eatery.operation_hours}</h4>
+                    <h4>Price Range: {eatery.price_range}</h4>
+                    <p>Description: {eatery.description}</p>
+                    {user && user.likedEateries && user.likedEateries.includes(eatery._id) ? (
+                        <button onClick={() => handleUnlike(eatery._id)}>Unlike</button>
+                    ) : (
+                        <button onClick={() => handleLike(eatery._id)}>Like</button>
+                    )}
+                </div>
+            </li>
+        ))}
+    </ul>
+</div>
+);
 }
