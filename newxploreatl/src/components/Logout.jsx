@@ -11,7 +11,7 @@ const Logout = () => {
         try {
             const response = await axios.post('http://localhost:3003/logout');
             setMessage(response.data.message);
-            navigate('/dashboard')
+            navigate('/')
         } catch (error) {
             setMessage('Logout failed. Please try again.');
         }

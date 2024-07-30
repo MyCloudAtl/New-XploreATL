@@ -108,7 +108,7 @@ const Home = ({user, setUser, profile, setProfile}) => {
                         <NavBar />
                     </nav>
                  </div>
-                    <Profile/>
+                    <Profile user={user} setUser={setUser} profile={profile} setProfile={setProfile}/>
                     <Logout />
                  </div>
             <div className='Footer'>

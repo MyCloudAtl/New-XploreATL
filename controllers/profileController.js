@@ -38,12 +38,14 @@ const createProfile = async (req, res) => {
 }
 const updateProfile = async (req, res) => {
     try {
+        // Cast to [ObjectId] failed for value "[ 'Alons Bakery & Market' ]" (type string) at path "favorite_eateries.0" because of "CastError"
         let { id } = req.params;
+        console.log("profile found: ", Profile.findById('66a84db24cbcd4d69cd76364'))
         let changeProfile = await Profile.findByIdAndUpdate(id, req.body, { new: true })
         if (changeProfile) {
             return res.status(200).json(changeProfile)
         }
-        throw new Error("Profile not found so cannot be updated")
+        throw new Error("Error while updating profile")
     } catch (error) {
         if (error.name === 'CastError' && error.kind === 'ObjectId') {
             return res.status(404).send(`Profile doesn't exist`)

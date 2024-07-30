@@ -73,11 +73,27 @@ app.get('/profiles', profileController.getAllProfile)
 app.get('/profiles/:id', profileController.getProfileById)
 app.post('/profiles', profileController.createProfile)
 app.put('/profiles/:id', profileController.updateProfile)
+app.put('/profiles/:userId', profileController.updateProfile)
 app.delete('/profiles/:id', profileController.deleteProfile)
+
+// app.get('/currentUser', async (req, res) => {
+//     // const userProfile = await Profile.findOne({user_id : user._id})
+//     console.log("req:" + req.user)
+//     const user = req.user
+//     if (!user) {
+//         return res.status(401).json({ message: 'Unauthorized' });
+//     }
+
+//     try {
+//         const userProfile = await Profile.findOne({ user_id: user._id });
+//         res.json({ user, userProfile });
+//     } catch (error) {
+//         res.status(500).json({ message: 'Server error', error });
+//     }
+// })
 
 app.get('/currentUser', async (req, res) => {
     const userProfile = await Profile.findOne({user_id : req.user._id})
-    console.log("req:" + req.user)
     const user = req.user
     res.json({user, userProfile})
 })
