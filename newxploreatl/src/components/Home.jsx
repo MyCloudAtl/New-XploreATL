@@ -61,44 +61,40 @@
 //   )
 // } 
 
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
-import NavBar from './NavBar';
-import Footer from './Footer';
-import Locations from './Locations';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link, useParams } from 'react-router-dom'
+import NavBar from './NavBar'
+import Footer from './Footer'
+import Locations from './Locations'
 import Logout from './Logout'
-// import Profile from './Profile';
+// import Profile from './Profile'
 import DeleteAccount from './DeleteAccount'
-import UserContext from '../UserContext'
 
-const Home = () => {
-    // {user, setUser, profile, setProfile}
-    const [loading, setLoading] = useState(true)
-    // const { user } = useContext(UserContext)
-    const { user, setUser } = useContext(UserContext)
+const Home = ({user, setUser, profile, setProfile}) => {
+    const [loading, setLoading] = useState(true);
 
     const getUser = async () => {
         try {
-            const response = await axios.get('http://localhost:3003/currentUser', { withCredentials: true });
+            const response = await axios.get('http://localhost:3003/currentUser', { withCredentials: true })
             console.log(response.data)
             setUser(response.data.user);
             // setProfile(response.data.userProfile)
-            setLoading(false);
+            setLoading(false)
         } catch (error) {
-            console.error('Error fetching user data:', error);
-            setLoading(false);
+            console.error('Error fetching user data:', error)
+            setLoading(false)
         }
     };
         useEffect(() => {
-          getUser();
-    }, []);
+          getUser()
+    }, [])
 
     if (loading) {
-        return <p>Loading...</p>;
+        return <p>Loading...</p>
     }
     if (!user) {
-        return <p>No user data available.</p>;
+        return <p>No user data available.</p>
     }
 
     return (
@@ -125,4 +121,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Home

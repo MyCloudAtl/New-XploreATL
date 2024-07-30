@@ -39,31 +39,31 @@
 //     )
 // }
 // export default Login
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Login = ({ updateCurrentUser }) => {
   let navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     try {
-      const response = await axios.post('http://localhost:3003/login', { username, password }, { withCredentials: true });
-      console.log(response);
-      setMessage(response.data.message);
+      const response = await axios.post('http://localhost:3003/login', { username, password }, { withCredentials: true })
+      console.log(response)
+      setMessage(response.data.message)
       if (updateCurrentUser) {
-        updateCurrentUser(response.data.user);
+        updateCurrentUser(response.data.user)
       } else {
-        console.error('updateCurrentUser is not defined');
+        console.error('updateCurrentUser is not defined')
       }
-      navigate('/');
+      navigate('/')
     } catch (error) {
-      setMessage('Login failed');
-      console.error('Error:', error);
+      setMessage('Login failed')
+      console.error('Error:', error)
     }
   };
 
@@ -86,6 +86,6 @@ const Login = ({ updateCurrentUser }) => {
   );
 };
 
-export default Login;
+export default Login
 
 

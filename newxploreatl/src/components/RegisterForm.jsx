@@ -75,14 +75,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const RegisterForm = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [message, setMessage] = useState('');
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [message, setMessage] = useState('')
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
         if (password !== confirmPassword) {
             setMessage('Passwords do not match')
             return;

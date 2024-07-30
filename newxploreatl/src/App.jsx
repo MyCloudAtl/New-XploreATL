@@ -11,7 +11,7 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import RegisterForm from './components/RegisterForm'
 // import UserContext from './UserContext'
-import { UserProvider } from './UserContext'
+// import { UserProvider } from './UserContext'
 // import Profile from './components/Profile'
 
 
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div className='App'>
-        <UserProvider>
+        {/* <UserProvider> */}
       <Routes>
                 <Route path="/" element={<Home 
                 user={user}
@@ -41,14 +41,12 @@ function App() {
                 <Route path="/hotspots" element={<HotspotList />} />
                 {/* <Route path="/hotspots/:id" element={<HotSpotCard />} /> */}
                 <Route path="/locations" element={<Locations />} />
-                {/* <Route path="/dashboard" element={<Dashboard updateCurrentUser={updateCurrentUser}/>} />
-                <Route path="/login" element={<Login updateCurrentUser={updateCurrentUser}/>} /> */}
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard updateCurrentUser={updateCurrentUser}/>} />
+                <Route path="/login" element={<Login updateCurrentUser={updateCurrentUser}/>} />
                 <Route path="/register" element={<RegisterForm />} />
                 <Route path="/logout" element={<Logout />} />
       </Routes>
-        </UserProvider>
+        {/* </UserProvider> */}
     </div>
   )
 }
