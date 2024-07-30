@@ -75,6 +75,7 @@ const deleteUser = async (req, res) => {
 // Like an Eatery
 const likeEatery = async (req, res) => {
   try {
+    console.log('like eatery was called', req)
     const { userId, eateryId } = req.params
     const user = await User.findById(userId)
     if (!user.likedEateries.includes(eateryId)) {
@@ -98,7 +99,7 @@ const unlikeEatery = async (req, res) => {
   } catch (error) {
     res.status(500).send(error.message)
   }
-};
+}
 
 // Like a Hotspot
 const likeHotspot = async (req, res) => {
@@ -113,7 +114,7 @@ const likeHotspot = async (req, res) => {
   } catch (error) {
     res.status(500).send(error.message)
   }
-};
+}
 
 // Unlike a Hotspot
 const unlikeHotspot = async (req, res) => {
@@ -128,6 +129,17 @@ const unlikeHotspot = async (req, res) => {
   }
 }
 
+exports.likeEatery = (req, res) => {
+  const { userId, eateryId } = req.params;
+  // Logic to like the eatery
+  res.status(200).send({ message: 'Eatery liked!' });
+};
+
+exports.unlikeEatery = (req, res) => {
+  const { userId, eateryId } = req.params;
+  // Logic to unlike the eatery
+  res.status(200).send({ message: 'Eatery unliked!' });
+}
 
 module.exports = {
     getAllUser, 

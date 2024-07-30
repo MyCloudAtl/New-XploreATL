@@ -13,9 +13,10 @@ const locationController = require('./controllers/locationController')
 const logger = require('morgan')
 const PORT = process.env.PORT || 3003
 const app = express()
+const userRoutes = require('./routes/userRoutes')
 const { User } = require('./models')
 
-
+app.use('/users', userRoutes)
 app.use(cors({credentials: true, origin:'http://localhost:5173'}))
 
 app.use(bodyParser.urlencoded({ extended: true }))
