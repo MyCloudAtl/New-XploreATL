@@ -40,7 +40,8 @@ const updateProfile = async (req, res) => {
     try {
         // Cast to [ObjectId] failed for value "[ 'Alons Bakery & Market' ]" (type string) at path "favorite_eateries.0" because of "CastError"
         let { id } = req.params;
-        console.log("profile found: ", Profile.findById('66a84db24cbcd4d69cd76364'))
+        console.log("req", id);
+        console.log("profile found: ",Profile.findById('66a84db24cbcd4d69cd76364'))
         let changeProfile = await Profile.findByIdAndUpdate(id, req.body, { new: true })
         if (changeProfile) {
             return res.status(200).json(changeProfile)

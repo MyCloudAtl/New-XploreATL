@@ -84,7 +84,7 @@ const RegisterForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (password !== confirmPassword) {
-            setMessage('Passwords do not match');
+            setMessage('Passwords do not match')
             return;
         }
 
@@ -94,9 +94,9 @@ const RegisterForm = () => {
                 email,
                 password,
             });
-            setMessage(response.data.message);
+            setMessage(response.data.message)
         } catch (error) {
-            setMessage('Registration failed');
+            setMessage('Registration failed')
         }
     };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 export default function ProfileForm({profile, setProfile}) {
     // const [locations, setLocations] = useState([])
@@ -10,6 +11,7 @@ export default function ProfileForm({profile, setProfile}) {
     const [selectedHotspot, setSelectedHotspot] = useState('')
     const tempFavEat = profile.favorite_eateries
     const [nameToId, setNameToId] = useState({})
+    const navigate = useNavigate()
 
     useEffect(() => {
       const choiceData = async () => {

@@ -69,6 +69,7 @@ import Footer from './Footer';
 import Locations from './Locations';
 import Logout from './Logout'
 import Profile from './Profile';
+import DeleteAccount from './DeleteAccount'
 
 const Home = ({user, setUser, profile, setProfile}) => {
     const [loading, setLoading] = useState(true);
@@ -110,6 +111,7 @@ const Home = ({user, setUser, profile, setProfile}) => {
                  </div>
                     <Profile user={user} setUser={setUser} profile={profile} setProfile={setProfile}/>
                     <Logout />
+                <DeleteAccount userId={user._id}/>
                  </div>
             <div className='Footer'>
                 <Footer />

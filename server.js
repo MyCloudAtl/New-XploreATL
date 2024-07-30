@@ -93,7 +93,8 @@ app.delete('/profiles/:id', profileController.deleteProfile)
 // })
 
 app.get('/currentUser', async (req, res) => {
-    const userProfile = await Profile.findOne({user_id : req.user._id})
+    const userProfile = await Profile.findOne({user_id : req.user.id})
+    //(user_id)
     const user = req.user
     res.json({user, userProfile})
 })
