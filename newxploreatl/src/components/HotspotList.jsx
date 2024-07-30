@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import NavBar from './NavBar'
 import { Link } from 'react-router-dom'
+import { UserContext } from '../UserContext'
 
 export default function HotspotList() {
   const [hotspots, setHotspots] = useState([])
+  const { user, setUser } = useContext(UserContext)
 
   useEffect(() => {
       const eateriesData = async () => {
