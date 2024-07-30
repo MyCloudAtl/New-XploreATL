@@ -68,7 +68,7 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import Locations from './Locations'
 import Logout from './Logout'
-// import Profile from './Profile'
+// import UserData from './UserData'
 import DeleteAccount from './DeleteAccount'
 
 const Home = ({user, setUser, profile, setProfile}) => {
@@ -110,7 +110,9 @@ const Home = ({user, setUser, profile, setProfile}) => {
                     </nav>
                  </div>
                  <h2 className="Greeting">Nice to have you back, {user.username}</h2>
-                    {/* <Profile user={user} setUser={setUser} profile={profile} setProfile={setProfile}/> */}
+                 <h3 className="Favorites">Favorite Eateries: {user.favorite_eateries}</h3>
+                 <h3 className="Favorites">Favorite Hotspots: {user.favorite_hotspots}</h3>
+                    {/* <UserData user={user} setUser={setUser}/> */}
                     <Logout />
                 <DeleteAccount userId={user._id}/>
                  </div>

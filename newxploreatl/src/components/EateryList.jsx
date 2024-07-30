@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 export default function EateryList() {
     const [eateries, setEateries] = useState([])
+    const [user, setUser] = useState(null)
 
     useEffect(() => {
         const eateriesData = async () => {
@@ -18,22 +19,56 @@ export default function EateryList() {
             } catch (error) {
                 console.error('Error grabbing eateries', error)
             }
-        };
+        }
     eateriesData ()
     }, [])
 
+    useEffect(() => {
+      const grabUser = async () => {
+          try {
+            console.log('grab user')
+            const response = await axios.get('http://localhost:3003/currentUser', { withCredentials: true })
+              if (response.status !== 200) {
+                  throw new Error('Failed to fetch user data')
+              }
+              console.log('set user')
+              console.log(response)
+              setUser(response.data)
+          } catch (error) {
+              console.error('Error fetching user', error)
+          }
+      }
+      grabUser()
+  }, [])
+
 
     const handleLike = async (eateryId) => {
-      await axios.post(`http://localhost:3003/users/${user._id}/likeEatery/${eateryId}`)
-      const response = await axios.get(`http://localhost:3003/users/${user._id}`)
-      setUser(response.data)
-    };
+      console.log(user)
+      if (user) {
+        console.log(`Liking eatery with ID: ${eateryId}`)
+        try{
+          await axios.post(`http://localhost:3003/users/${user._id}/likeEatery/${eateryId}`)
+          const response = await axios.get(`http://localhost:3003/users/${user._id}`)
+          console.log(response.data)
+          setUser(response.data)
+        } catch (error) {
+          console.error('Error liking eatery', error)
+        }
+      }
+    }
     
     const handleUnlike = async (eateryId) => {
-      await axios.post(`http://localhost:3003/users/${user._id}/unlikeEatery/${eateryId}`)
-      const response = await axios.get(`http://localhost:3003/users/${user._id}`)
-    setUser(response.data)
-    } 
+      if (user) {
+        console.log(`Unliking eatery with ID: ${eateryId}`)
+        try {
+          await axios.post(`http://localhost:3003/users/${user._id}/unlikeEatery/${eateryId}`)
+          const response = await axios.get(`http://localhost:3003/users/${user._id}`)
+          setUser(response.data)
+        } catch (error) {
+          console.error('Error unliking eatery', error)
+        }
+      }
+    }
 
   return (
     <div className="EateryList">
@@ -51,7 +86,7 @@ export default function EateryList() {
              <h4>Operation Hours: {eatery.operation_hours}</h4>
              <h4>Price Range: {eatery.price_range}</h4>
              <p>Description: {eatery.description}</p>
-             {user?.likedEateries.includes(eatery._id) ? (
+             {user && user.likedEateries && user.likedEateries.includes(eatery._id) ? (
             <button onClick={() => handleUnlike(eatery._id)}>Unlike</button>
           ) : (
             <button onClick={() => handleLike(eatery._id)}>Like</button>

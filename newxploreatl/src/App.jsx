@@ -12,7 +12,7 @@ import Logout from './components/Logout'
 import RegisterForm from './components/RegisterForm'
 // import UserContext from './UserContext'
 // import { UserProvider } from './UserContext'
-// import Profile from './components/Profile'
+// import UserData from './components/UserData'
 
 
 function App() {
@@ -45,6 +45,9 @@ function App() {
                 <Route path="/login" element={<Login updateCurrentUser={updateCurrentUser}/>} />
                 <Route path="/register" element={<RegisterForm />} />
                 <Route path="/logout" element={<Logout />} />
+                {/* <Route path="/userdata" element={<UserData 
+                user={user}
+                setUser={setUser} />} /> */}
       </Routes>
         {/* </UserProvider> */}
     </div>
