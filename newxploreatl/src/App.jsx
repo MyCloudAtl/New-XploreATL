@@ -10,30 +10,29 @@ import Locations from './components/Locations'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import RegisterForm from './components/RegisterForm'
-import Profile from './components/Profile'
+// import Profile from './components/Profile'
 
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
-  const [profile, setProfile] = useState({
-    favorite_eateries: [],
-    favorite_hotspots: [],
-    bookmarked_eateries: [],
-    bookmarked_hotspots: []
-  })
+  // const [profile, setProfile] = useState({
+  //   favorite_eateries: [],
+  //   favorite_hotspots: [],
+  //   bookmarked_eateries: [],
+  //   bookmarked_hotspots: []
+  // })
   const [user, setUser] = useState({username: '' })
   
   const updateCurrentUser = (newState) => {
     setCurrentUser(newState);
   };
+
   return (
     <div className='App'>
       <Routes>
                 <Route path="/" element={<Home 
                 user={user}
-                setUser={setUser}
-                profile={profile}
-                setProfile={setProfile}/>} />
+                setUser={setUser} />} />
                 <Route path="/eateries/" element={<EateryList />} />
                 {/* <Route path="/eateries/:id" element={<EateryCard />} /> */}
                 <Route path="/hotspots" element={<HotspotList />} />
@@ -43,11 +42,6 @@ function App() {
                 <Route path="/login" element={<Login updateCurrentUser={updateCurrentUser}/>} />
                 <Route path="/register" element={<RegisterForm />} />
                 <Route path="/logout" element={<Logout />} />
-                <Route path="/profile" element={<Profile 
-                user={user}
-                setUser={setUser} 
-                profile={profile}
-                setProfile={setProfile}/>}/>
       </Routes>
     </div>
   )

@@ -68,7 +68,7 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import Locations from './Locations';
 import Logout from './Logout'
-import Profile from './Profile';
+// import Profile from './Profile';
 import DeleteAccount from './DeleteAccount'
 
 const Home = ({user, setUser, profile, setProfile}) => {
@@ -79,7 +79,7 @@ const Home = ({user, setUser, profile, setProfile}) => {
             const response = await axios.get('http://localhost:3003/currentUser', { withCredentials: true });
             console.log(response.data)
             setUser(response.data.user);
-            setProfile(response.data.userProfile)
+            // setProfile(response.data.userProfile)
             setLoading(false);
         } catch (error) {
             console.error('Error fetching user data:', error);
@@ -109,7 +109,8 @@ const Home = ({user, setUser, profile, setProfile}) => {
                         <NavBar />
                     </nav>
                  </div>
-                    <Profile user={user} setUser={setUser} profile={profile} setProfile={setProfile}/>
+                 <h2 className="Greeting">Nice to have you back, {user.username}</h2>
+                    {/* <Profile user={user} setUser={setUser} profile={profile} setProfile={setProfile}/> */}
                     <Logout />
                 <DeleteAccount userId={user._id}/>
                  </div>

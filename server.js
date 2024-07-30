@@ -9,11 +9,11 @@ const eateryController = require('./controllers/eateryController')
 const userController = require('./controllers/userController')
 const hotspotController = require('./controllers/hotspotController')
 const locationController = require('./controllers/locationController')
-const profileController = require('./controllers/profileController')
+// const profileController = require('./controllers/profileController')
 const logger = require('morgan')
 const PORT = process.env.PORT || 3003
 const app = express()
-const { User, Profile } = require('./models')
+const { User } = require('./models')
 
 
 app.use(cors({credentials: true, origin:'http://localhost:5173'}))
@@ -69,12 +69,12 @@ app.post('/locations', locationController.createLocation)
 app.put('/locations/:id', locationController.updateLocation)
 app.delete('/locations/:id', locationController.deleteLocation)
 
-app.get('/profiles', profileController.getAllProfile)
-app.get('/profiles/:id', profileController.getProfileById)
-app.post('/profiles', profileController.createProfile)
-app.put('/profiles/:id', profileController.updateProfile)
-app.put('/profiles/:userId', profileController.updateProfile)
-app.delete('/profiles/:id', profileController.deleteProfile)
+// app.get('/profiles', profileController.getAllProfile)
+// app.get('/profiles/:id', profileController.getProfileById)
+// app.post('/profiles', profileController.createProfile)
+// app.put('/profiles/:id', profileController.updateProfile)
+// app.put('/profiles/:userId', profileController.updateProfile)
+// app.delete('/profiles/:id', profileController.deleteProfile)
 
 // app.get('/currentUser', async (req, res) => {
 //     // const userProfile = await Profile.findOne({user_id : user._id})
@@ -109,8 +109,6 @@ app.post('/register', async (req, res) => {
     try {
         const user = new User({ username, email })
         await User.register(user, password)
-        const profile = new Profile({user_id: user._id})
-        profile.save()
         res.status(201).send({ message: 'Registration successful', user })
     } catch (error) {
         res.status(500).send({ message: 'Registration failed', error })
