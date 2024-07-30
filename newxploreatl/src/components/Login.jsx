@@ -44,7 +44,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
-const Login = () => {
+const Login = ({setCurrentUser}) => {
   let navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -55,6 +55,7 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:3003/login', { username, password },{ withCredentials: true })
       setMessage(response.data.message);
+      // setCurrentUser(response.data.user)
       navigate('/');
     } catch (error) {
       setMessage('Login failed');

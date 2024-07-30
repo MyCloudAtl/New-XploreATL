@@ -19,13 +19,11 @@ const main = async () => {
   const users = [
     {
         username: "liftsister",
-        _id: "liftsister",
         email: "liftsister@yahoo.com",
         password: "secret"
     },
     {
         username: "CloudATL",
-        _id: "CloudATL",
         email: "mm@fake.com",
         password: "12345678"
     },

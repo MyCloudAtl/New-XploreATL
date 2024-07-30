@@ -13,7 +13,8 @@ const profileController = require('./controllers/profileController')
 const logger = require('morgan')
 const PORT = process.env.PORT || 3003
 const app = express()
-const { User } = require('./models')
+const { User, Profile } = require('./models')
+
 
 app.use(cors({credentials: true, origin:'http://localhost:5173'}))
 
@@ -74,9 +75,11 @@ app.post('/profiles', profileController.createProfile)
 app.put('/profiles/:id', profileController.updateProfile)
 app.delete('/profiles/:id', profileController.deleteProfile)
 
-app.get('/currentUser', (req, res) => {
+app.get('/currentUser', async (req, res) => {
+    const userProfile = await Profile.findOne({user_id : req.user._id})
     console.log("req:" + req.user)
-    res.json(req.user)
+    const user = req.user
+    res.json({user, userProfile})
 })
 
 //User Resources
@@ -84,8 +87,11 @@ app.post('/register', async (req, res) => {
     const { username, email, password } = req.body
     try {
         const user = new User({ username, email })
-        await User.register(user, password);
-        res.status(201).send({ message: 'Registration successful' })
+        await User.register(user, password)
+        // await user.save()
+        const profile = new Profile({user_id: user._id})
+        profile.save()
+        res.status(201).send({ message: 'Registration successful', user })
     } catch (error) {
         res.status(500).send({ message: 'Registration failed', error })
     }
@@ -103,28 +109,31 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
     res.status(200).send({ message: 'Login successful' })
 })
 app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    
     try {
-      const { username, password } = req.body;
-  
-      // Find the user
       const user = await User.findOne({ username });
+      
       if (!user) {
-        return res.status(401).json({ message: 'User not found' });
+        return res.status(401).send('Unauthorized');
       }
-  
-      // Check password (assuming you have some method to validate it)
-      const isMatch = await user.comparePassword(password); // Example method
+      
+      const isMatch = await bcrypt.compare(password, user.password);
+      
       if (!isMatch) {
-        return res.status(401).json({ message: 'Invalid credentials' });
+        return res.status(401).send('Unauthorized');
       }
-  
-      // Successful login logic here
-      res.status(200).json({ message: 'Login successful' });
+      
+      // Assuming a JWT token is generated and sent upon successful login
+      const token = jwt.sign({ id: user._id }, 'your_jwt_secret')
+      res.json({ token })
+      
     } catch (error) {
-      console.error('Error during login:', error);
-      res.status(500).json({ message: 'Server error' });
+      console.error('Login Error:', error);
+      res.status(500).send('Server Error');
     }
   });
+  
   
 app.delete('/users/:id', async (req, res) => {
     const userId = req.params.id

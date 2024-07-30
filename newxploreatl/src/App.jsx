@@ -9,40 +9,37 @@ import HotspotList from './components/HotspotList'
 import Locations from './components/Locations'
 import Login from './components/Login'
 import Logout from './components/Logout'
-// import SideBar from './components/SideBar'
 import RegisterForm from './components/RegisterForm'
+import Profile from './components/Profile'
 
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
-
-
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     try {
-  //       const response = await axios.get('http://localhost:3003/currentUser');
-  //       setCurrentUser(response.data);
-  //   } catch (error) {
-  //       console.error('Error fetching current user:', error);
-  //   }
-  // }
-  //   getUser();
-  // }, []);
+  const [currentUser, setCurrentUser] = useState(null)
+  const [profile,setProfile] = useState({favorite_eateries: [], 
+    favorite_hotspots: [], bookmarked_eateries: [], bookmarked_eateries: []})
+  const [user, setUser] = useState({username: ''})
 
   return (
     <div className='App'>
       <Routes>
-                <Route path="/" element={<Home currentUser={currentUser}/>} />
+                <Route path="/" element={<Home 
+                user={user}
+                setUser={setUser}
+                profile={profile}
+                setProfile={setProfile}/>} />
                 <Route path="/eateries/" element={<EateryList />} />
                 {/* <Route path="/eateries/:id" element={<EateryCard />} /> */}
                 <Route path="/hotspots" element={<HotspotList />} />
                 {/* <Route path="/hotspots/:id" element={<HotSpotCard />} /> */}
                 <Route path="/locations" element={<Locations />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard currentUser={currentUser}/>} />
+                <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>} />
                 <Route path="/register" element={<RegisterForm />} />
                 <Route path="/logout" element={<Logout />} />
-                {/* <Route path="/sidebar/:id" element={<SideBar />} /> */}
+                <Route path="/profile" element={<Profile user={user}
+                setUser={setUser} 
+                profile={profile}
+                setProfile={setProfile}/>}/>
       </Routes>
     </div>
   )

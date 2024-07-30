@@ -67,29 +67,33 @@ import { Link, useParams } from 'react-router-dom';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import Locations from './Locations';
+import Logout from './Logout'
+import Profile from './Profile';
 
-const Home = () => {
-    const [user, setUser] = useState(null);
+const Home = ({user, setUser, profile, setProfile}) => {
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const getUser = async () => {
-            try {
-                const response = await axios.get('http://localhost:3003/users/');
-                console.log(response);
-                setUser(response.data);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-                setLoading(false);
-            }
-        };
-
-        getUser();
+    const getUser = async () => {
+        try {
+            const response = await axios.get('http://localhost:3003/currentUser', { withCredentials: true });
+            console.log(response.data)
+            setUser(response.data.user);
+            setProfile(response.data.userProfile)
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            setLoading(false);
+        }
+    };
+        useEffect(() => {
+          getUser();
     }, []);
 
     if (loading) {
         return <p>Loading...</p>;
+    }
+    if (!user) {
+        return <p>No user data available.</p>;
     }
 
     return (
@@ -97,15 +101,16 @@ const Home = () => {
             <div className="Main">
                 <header className="Header">
                     <h1>XploreATL</h1>
-                    <h2 className="Greeting">Nice to have you back, {user?.username || 'Guest'}</h2>
                     <Locations />
                 </header>
                 <div className='Body'>
                     <nav className='Nav'>
                         <NavBar />
                     </nav>
-                </div>
-            </div>
+                 </div>
+                    <Profile/>
+                    <Logout />
+                 </div>
             <div className='Footer'>
                 <Footer />
             </div>
