@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import NavBar from './NavBar'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../UserContext'
+import UserContext from '../UserContext'
 
 export default function EateryList() {
     const [eateries, setEateries] = useState([])
-    const { user,setUser } = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
 
     useEffect(() => {
         const eateriesData = async () => {
@@ -26,10 +26,14 @@ export default function EateryList() {
 
     const handleLike = async (eateryId) => {
       await axios.post(`http://localhost:3003/users/${user._id}/likeEatery/${eateryId}`)
+      const response = await axios.get(`http://localhost:3003/users/${user._id}`)
+      setUser(response.data)
     };
   
     const handleUnlike = async (eateryId) => {
       await axios.post(`http://localhost:3003/users/${user._id}/unlikeEatery/${eateryId}`)
+      const response = await axios.get(`http://localhost:3003/users/${user._id}`)
+    setUser(response.data)
     } 
 
   return (

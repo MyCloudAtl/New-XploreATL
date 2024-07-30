@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import NavBar from './NavBar'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../UserContext'
+import UserContext from '../UserContext'
 
 export default function HotspotList() {
   const [hotspots, setHotspots] = useState([])
@@ -12,7 +12,7 @@ export default function HotspotList() {
       const eateriesData = async () => {
           try {
               const response = await axios.get('http://localhost:3003/hotspots')
-              console.log('Hotspots data:', response.data);
+              console.log('Hotspots data:', response.data)
               if (response.status !== 200) {
                   throw new Error('Not working')
               }
@@ -21,8 +21,22 @@ export default function HotspotList() {
               console.error('Error grabbing hotspots', error)
           }
       };
-  eateriesData ();
-  }, []);
+  eateriesData ()
+  }, [])
+
+
+  const handleLike = async (hotspotId) => {
+    await axios.post(`http://localhost:3003/users/${user._id}/likeHotspot/${hotspotId}`)
+    const response = await axios.get(`http://localhost:3003/users/${user._id}`)
+    setUser(response.data);
+  }
+
+  const handleUnlike = async (hotspotId) => {
+    await axios.post(`http://localhost:3003/users/${user._id}/unlikeHotspot/${hotspotId}`)
+    const response = await axios.get(`http://localhost:3003/users/${user._id}`)
+    setUser(response.data);
+  }
+
   return (
     <div className="HotSpotList">
       {<NavBar />}
@@ -39,6 +53,11 @@ export default function HotspotList() {
              <h4>Operation Hours: {hotspot.operations_hours}</h4>
              <h4>Price Range: {hotspot.price_range}</h4>
              <p>Description: {hotspot.description}</p>
+             {user?.likedHotspots.includes(hotspot._id) ? (
+            <button onClick={() => handleUnlike(hotspot._id)}>Unlike</button>
+          ) : (
+            <button onClick={() => handleLike(hotspot._id)}>Like</button>
+          )}
            </div>
          </li>
        ))}

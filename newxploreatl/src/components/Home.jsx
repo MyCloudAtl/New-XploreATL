@@ -61,7 +61,7 @@
 //   )
 // } 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import NavBar from './NavBar';
@@ -70,9 +70,13 @@ import Locations from './Locations';
 import Logout from './Logout'
 // import Profile from './Profile';
 import DeleteAccount from './DeleteAccount'
+import UserContext from '../UserContext'
 
-const Home = ({user, setUser, profile, setProfile}) => {
-    const [loading, setLoading] = useState(true);
+const Home = () => {
+    // {user, setUser, profile, setProfile}
+    const [loading, setLoading] = useState(true)
+    // const { user } = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
 
     const getUser = async () => {
         try {
