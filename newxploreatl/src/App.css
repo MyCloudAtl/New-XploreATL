@@ -1,12 +1,5 @@
-/* #root {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  padding: 1rem;
-  background: linear-gradient(#870000, #859398);
-  text-align: center;
-  background-color: linear-gradient(#870000, #859398);
-} */
+@import url('https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Inspiration&family=Kaushan+Script&display=swap');
+
 #root {
   width: 100%;
   max-width: 100%;
@@ -14,6 +7,10 @@
   padding: 1rem;
   background: linear-gradient(#870000, #859398);
   text-align: center;
+}
+
+h1{
+  font-family: "Baskervville SC", serif;
 }
 
 .logo {
@@ -135,9 +132,14 @@ body {
 }
 .Side{
   display: flex;
+  max-width: 287.06px;
   padding: 1em;
   flex-direction: column;
   background-image: linear-gradient(rgba(255, 239, 186, 0.9), rgba(255, 255, 255, 0.5));
+  h2{
+    font-size: xx-large;
+    color: #007bff;
+  }
 }
 .Footer {
   width: 100%;
@@ -238,7 +240,7 @@ li {
   background-color: #017f1f;
 }
 
-.eatery-details h3 a {
+.eatery-details h3 a{
   margin-right: 20px;
 }
 

@@ -26,7 +26,7 @@ export default function HotspotList() {
   return (
     <div className="HotSpotList">
       {<NavBar />}
-        <h1>HotSpotList</h1>
+        <h1>Hotspot List</h1>
         <ul>
        {hotspots.map(hotspot => (
            <li key={hotspot.category}>

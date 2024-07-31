@@ -45,13 +45,13 @@ export default function EateryList() {
 
 
     const handleLike = async (eateryId) => {
-      console.log(user)
       if (user) {
         console.log(`Liking eatery with ID: ${eateryId}`)
         try{
           await axios.post(`http://localhost:3003/users/${user._id}/likeEatery/${eateryId}`)
           const response = await axios.get(`http://localhost:3003/users/${user._id}`)
           console.log(response.data)
+          console.log('handlelike setuser is called')
           setUser(response.data)
         } catch (error) {
           console.error('Error liking eatery', error)
@@ -65,6 +65,7 @@ export default function EateryList() {
         try {
           await axios.post(`http://localhost:3003/users/${user._id}/unlikeEatery/${eateryId}`)
           const response = await axios.get(`http://localhost:3003/users/${user._id}`)
+          console.log('handleunlike setuser is called')
           setUser(response.data)
         } catch (error) {
           console.error('Error unliking eatery', error)
@@ -76,7 +77,7 @@ export default function EateryList() {
   return (
    <div className="EateryList">
             <NavBar />
-            <h1>EateryList</h1>
+            <h1>Eatery List</h1>
             <ul className="eatery-list">
                 {eateries.map(eatery => (
                     <li key={eatery._id} className="eatery-item">
@@ -88,15 +89,19 @@ export default function EateryList() {
                             <h4>Operation Hours: {eatery.operation_hours}</h4>
                             <h4>Price Range: <span className="green-text">{eatery.price_range}</span></h4>
                             <p>Description: {eatery.description}</p>
-                            {user && user.likedEateries && user.likedEateries.includes(eatery._id) ? (
+                            // https://stackoverflow.com/questions/135448/how-do-i-check-if-an-object-has-a-specific-property-in-javascript
+                            {user && user.likedEateries && user.likedEateries.map(x => {
+                              if(Object.hasOwn(x, '_id')) return x._id
+                              else return x;
+                            }).includes(eatery._id) ? (
                                 <button onClick={() => handleUnlike(eatery._id)}>Unlike</button>
                             ) : (
-                                <button onClick={() => handleLike(eatery._id)}><FontAwesomeIcon icon={faHeart} /></button>
+                                <button onClick={() => handleLike(eatery._id)}><FontAwesomeIcon icon={faHeart} />Like?</button>
                             )}
                         </div>
                     </li>
                 ))}
             </ul>
         </div>
-    );
+    )
 }

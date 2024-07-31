@@ -112,7 +112,7 @@ const Home = ({user, setUser, profile, setProfile}) => {
                  </div>
                  <div className="Side">
                         <Logout />
-                    <h2>Nice to have you back, {user.username}</h2>
+                    <h2>Nice to have you back {user.username}</h2>
                     <h3>Favorite Eateries:</h3>
                     <ul>
                     {user.likedEateries.map((eatery) => (

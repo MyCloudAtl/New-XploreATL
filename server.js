@@ -104,12 +104,14 @@ app.delete('/locations/:id', locationController.deleteLocation)
 //     console.log("req:" + req.user)
 //     res.json(req.user)
 // })
+
 app.get('/currentUser', async (req, res) => {
     try {
       const userId = req.user._id
       const user = await User.findById(userId).populate('likedEateries').exec()
       res.json(user)
     } catch (error) {
+        console.log(error)
       res.status(500).json({ error: 'Failed to changeover user data' })
     }
   })
