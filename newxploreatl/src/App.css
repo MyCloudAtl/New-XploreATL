@@ -192,13 +192,14 @@ li {
 .eatery-item {
   /* background-color: #f9f9f9;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 400px; /* Fixed width */
+  /* width: 400px; Fixed width */
   height: 500px;
-  display: flex; */
-  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.849);
+  background-color: rgba(255, 239, 186, 0.593);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   padding: 10px;
   box-sizing: border-box;
@@ -206,7 +207,7 @@ li {
 
 .eatery-item img {
   width: 100%;
-  height: auto;  /* Ensure the image fits within the card */
+  height: auto;
   border-radius: 8px;
 }
 
