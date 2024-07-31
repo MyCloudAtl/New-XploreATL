@@ -68,7 +68,6 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import Locations from './Locations'
 import Logout from './Logout'
-// import UserData from './UserData'
 import DeleteAccount from './DeleteAccount'
 
 const Home = ({user, setUser, profile, setProfile}) => {
@@ -96,7 +95,9 @@ const Home = ({user, setUser, profile, setProfile}) => {
     if (!user) {
         return <p>No user data available.</p>
     }
-
+    console.log('user', user)
+    console.log('favorite eateries: ', user.favorite_eateries)
+    console.log('favorite hotspos: ', user.favorite_hotspots)
     return (
         <div className="Home">
             <div className="Main">
@@ -109,12 +110,23 @@ const Home = ({user, setUser, profile, setProfile}) => {
                         <NavBar />
                     </nav>
                  </div>
-                 <h2 className="Greeting">Nice to have you back, {user.username}</h2>
-                 <h3 className="Favorites">Favorite Eateries: {user.favorite_eateries}</h3>
-                 <h3 className="Favorites">Favorite Hotspots: {user.favorite_hotspots}</h3>
-                    {/* <UserData user={user} setUser={setUser}/> */}
-                    <Logout />
+                 <div className="Side">
+                        <Logout />
+                    <h2>Nice to have you back, {user.username}</h2>
+                    <h3>Favorite Eateries:</h3>
+                    <ul>
+                    {user.likedEateries.map((eatery) => (
+                        <li key={eatery._id}>{eatery.name}</li>
+                    ))}
+                    </ul>
+                    <h3>Favorite Hotspots:</h3>
+                    <ul>
+                    {user.likedHotspots.map((hotspot) => (
+                        <li key={hotspot._id}>{hotspot.name}</li>
+                    ))}
+                    </ul>
                 <DeleteAccount userId={user._id}/>
+                    </div>
                  </div>
             <div className='Footer'>
                 <Footer />

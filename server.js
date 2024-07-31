@@ -100,10 +100,19 @@ app.delete('/locations/:id', locationController.deleteLocation)
 //     res.json({user, userProfile})
 // })
 
-app.get('/currentUser', (req, res) => {
-    console.log("req:" + req.user)
-    res.json(req.user)
-})
+// app.get('/currentUser', (req, res) => {
+//     console.log("req:" + req.user)
+//     res.json(req.user)
+// })
+app.get('/currentUser', async (req, res) => {
+    try {
+      const userId = req.user._id;
+      const user = await User.findById(userId).populate('likedEateries').exec()
+      res.json(user)
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to changeover user data' })
+    }
+  })
 //User Resources
 app.post('/register', async (req, res) => {
     const { username, email, password } = req.body

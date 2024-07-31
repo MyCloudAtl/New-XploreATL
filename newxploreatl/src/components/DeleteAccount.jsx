@@ -24,7 +24,7 @@ const DeleteAccount = ({ userId }) => {
 
     return (
         <div>
-            <button onClick={handleDelete}>Delete Account</button>
+            <button className='Goodbye' onClick={handleDelete}>Delete Account</button>
             {message && <p>{message}</p>}
         </div>
     )
