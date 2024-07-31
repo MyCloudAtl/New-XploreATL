@@ -10,7 +10,7 @@
 
 ## Technologies Used:
 ### <u>Frontend:</u>
-> HTML, CSS, JavaScript (ES6+)
+> HTML, CSS, JavaScript (ES6+), Font Awesome
 > React.js, React Hooks (useState, useEffect, etc.)
 > Passport(Passport-Local & Passport-local-Mongoose)
 > Axios for HTTP requests

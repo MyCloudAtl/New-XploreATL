@@ -154,7 +154,6 @@ app.post('/login', async (req, res) => {
         return res.status(401).send('Unauthorized')
       }
       
-      // Assuming a JWT token is generated and sent upon successful login
       const token = jwt.sign({ id: user._id }, 'your_jwt_secret')
       res.json({ token })
       
