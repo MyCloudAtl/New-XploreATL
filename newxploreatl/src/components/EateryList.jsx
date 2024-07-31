@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import NavBar from './NavBar'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 export default function EateryList() {
     const [eateries, setEateries] = useState([])
@@ -89,7 +91,7 @@ export default function EateryList() {
                             {user && user.likedEateries && user.likedEateries.includes(eatery._id) ? (
                                 <button onClick={() => handleUnlike(eatery._id)}>Unlike</button>
                             ) : (
-                                <button onClick={() => handleLike(eatery._id)}>Like</button>
+                                <button onClick={() => handleLike(eatery._id)}><FontAwesomeIcon icon={faHeart} /></button>
                             )}
                         </div>
                     </li>
