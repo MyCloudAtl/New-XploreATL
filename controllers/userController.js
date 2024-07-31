@@ -46,7 +46,7 @@ const createUser = async (req, res) => {
 //update
 const updateUser = async (req, res) => {
     try {
-        let { id } = req.params;
+        let { id } = req.params
         let changedObject = await User.findByIdAndUpdate(id, req.body, { new: true })
         if (changedObject) {
             return res.status(200).json(changedObject)
@@ -62,10 +62,10 @@ const updateUser = async (req, res) => {
 
 //delete
 const deleteUser = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params
     try {
         // Logic to delete user by ID from MongoDB
-        await User.findByIdAndDelete(id);
+        await User.findByIdAndDelete(id)
         res.status(200).send({ message: 'User deleted successfully' })
     } catch (error) {
         res.status(500).send({ message: 'Error deleting user', error })
@@ -86,7 +86,7 @@ const likeEatery = async (req, res) => {
   } catch (error) {
     res.status(500).send(error.message)
   }
-};
+}
 
 // Unlike an Eatery
 const unlikeEatery = async (req, res) => {
@@ -94,7 +94,7 @@ const unlikeEatery = async (req, res) => {
     const { userId, eateryId } = req.params
     const user = await User.findById(userId)
     user.likedEateries.pull(eateryId)
-    await user.save();
+    await user.save()
     res.status(200).json(user)
   } catch (error) {
     res.status(500).send(error.message)
@@ -130,15 +130,15 @@ const unlikeHotspot = async (req, res) => {
 }
 
 exports.likeEatery = (req, res) => {
-  const { userId, eateryId } = req.params;
+  const { userId, eateryId } = req.params
   // Logic to like the eatery
-  res.status(200).send({ message: 'Eatery liked!' });
-};
+  res.status(200).send({ message: 'Eatery liked!' })
+}
 
 exports.unlikeEatery = (req, res) => {
-  const { userId, eateryId } = req.params;
+  const { userId, eateryId } = req.params
   // Logic to unlike the eatery
-  res.status(200).send({ message: 'Eatery unliked!' });
+  res.status(200).send({ message: 'Eatery unliked!' })
 }
 
 module.exports = {

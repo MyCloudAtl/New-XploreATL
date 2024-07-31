@@ -26,8 +26,8 @@ function App() {
   const [user, setUser] = useState({username: '' })
   
   const updateCurrentUser = (newState) => {
-    setCurrentUser(newState);
-  };
+    setCurrentUser(newState)
+  }
 
   return (
     <div className='App'>

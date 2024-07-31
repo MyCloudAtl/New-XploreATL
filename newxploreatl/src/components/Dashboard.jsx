@@ -1,6 +1,6 @@
 import React from "react"
-import RegisterForm from "./RegisterForm.jsx";
-import Login from './Login.jsx';
+import RegisterForm from "./RegisterForm.jsx"
+import Login from './Login.jsx'
 
 const Dashboard = ({updateCurrentUser}) => {
     return (

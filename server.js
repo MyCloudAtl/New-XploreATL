@@ -87,7 +87,7 @@ app.delete('/locations/:id', locationController.deleteLocation)
 
 //     try {
 //         const userProfile = await Profile.findOne({ user_id: user._id })
-//         res.json({ user, userProfile });
+//         res.json({ user, userProfile })
 //     } catch (error) {
 //         res.status(500).json({ message: 'Server error', error })
 //     }
@@ -106,7 +106,7 @@ app.delete('/locations/:id', locationController.deleteLocation)
 // })
 app.get('/currentUser', async (req, res) => {
     try {
-      const userId = req.user._id;
+      const userId = req.user._id
       const user = await User.findById(userId).populate('likedEateries').exec()
       res.json(user)
     } catch (error) {
@@ -137,19 +137,19 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
     res.status(200).send({ message: 'Login successful' })
 })
 app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password } = req.body
     
     try {
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ username })
       
       if (!user) {
-        return res.status(401).send('Unauthorized');
+        return res.status(401).send('Unauthorized')
       }
       
-      const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = await bcrypt.compare(password, user.password)
       
       if (!isMatch) {
-        return res.status(401).send('Unauthorized');
+        return res.status(401).send('Unauthorized')
       }
       
       // Assuming a JWT token is generated and sent upon successful login
@@ -157,20 +157,20 @@ app.post('/login', async (req, res) => {
       res.json({ token })
       
     } catch (error) {
-      console.error('Login Error:', error);
-      res.status(500).send('Server Error');
+      console.error('Login Error:', error)
+      res.status(500).send('Server Error')
     }
   });
   
   
 app.delete('/users/:id', async (req, res) => {
     const userId = req.params.id
-    const { username, password } = req.body;
+    const { username, password } = req.body
     try {
-        await User.findByIdAndDelete(req.params.id);
+        await User.findByIdAndDelete(req.params.id)
         res.status(200).json({ message: 'Account deleted successfully' });
     } catch (error) {
-        console.error('Error deleting user:', error);
+        console.error('Error deleting user:', error)
         res.status(500).json({ message: 'Failed to delete account', error });
     }
 })
