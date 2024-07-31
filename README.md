@@ -1,6 +1,6 @@
-<img src="../Home.png" width=500>
-<img src="../Modal.png" width=500>
-<img src="../Calendar.png" width=1000>
+<img src="./Dashboard.png" width=500>
+<img src="./Home.png" width=480>
+<img src="./ListExample.png" width=1000>
 
 # Project Name: Explore Atlanta
 
