@@ -220,7 +220,7 @@ li {
 .eatery-details h4,
 .eatery-details p {
   margin: 10px 0;
-  font-size: 1em;
+  /* font-size: 1em; */
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -263,4 +263,17 @@ li {
   color: #ffffff;
   opacity: 1; /* Full opacity on hover */
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.8); /* Glowing effect */
+}
+.Dashboard{
+  h1{
+    font-size: 100px;
+    margin: 50px;
+  }
+  form{
+    font-size: x-large;
+  }
+  .LoginForm{
+    padding-bottom: 175px;
+    font-size: x-large;
+  }
 }

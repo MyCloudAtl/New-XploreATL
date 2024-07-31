@@ -74,7 +74,8 @@ export default function EateryList() {
     }
 
 // Reference - https://stackoverflow.com/questions/50709625/link-with-target-blank-and-rel-noopener-noreferrer-still-vulnerable
-  return (
+// Reference - https://stackoverflow.com/questions/135448/how-do-i-check-if-an-object-has-a-specific-property-in-javascript  
+return (
    <div className="EateryList">
             <NavBar />
             <h1>Eatery List</h1>
@@ -89,7 +90,6 @@ export default function EateryList() {
                             <h4>Operation Hours: {eatery.operation_hours}</h4>
                             <h4>Price Range: <span className="green-text">{eatery.price_range}</span></h4>
                             <p>Description: {eatery.description}</p>
-                            // https://stackoverflow.com/questions/135448/how-do-i-check-if-an-object-has-a-specific-property-in-javascript
                             {user && user.likedEateries && user.likedEateries.map(x => {
                               if(Object.hasOwn(x, '_id')) return x._id
                               else return x;
