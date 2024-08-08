@@ -108,7 +108,10 @@ app.delete('/locations/:id', locationController.deleteLocation)
 app.get('/currentUser', async (req, res) => {
     try {
       const userId = req.user._id
-      const user = await User.findById(userId).populate('likedEateries').exec()
+      const user = await User.findById(userId)
+      .populate('likedEateries')
+      .populate('likedHotspots')
+      .exec()
       res.json(user)
     } catch (error) {
         console.log(error)

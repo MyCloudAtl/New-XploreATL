@@ -104,6 +104,7 @@ const unlikeEatery = async (req, res) => {
 // Like a Hotspot
 const likeHotspot = async (req, res) => {
   try {
+    console.log('like hotspot was called', req)
     const { userId, hotspotId } = req.params
     const user = await User.findById(userId)
     if (!user.likedHotspots.includes(hotspotId)) {

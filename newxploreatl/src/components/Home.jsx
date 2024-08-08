@@ -96,8 +96,8 @@ const Home = ({user, setUser, profile, setProfile}) => {
         return <p>No user data available.</p>
     }
     console.log('user', user)
-    console.log('favorite eateries: ', user.favorite_eateries)
-    console.log('favorite hotspos: ', user.favorite_hotspots)
+    // console.log('favorite eateries: ', user.favorite_eateries)
+    // console.log('favorite hotspots: ', user.favorite_hotspots)
     return (
         <div className="Home">
             <div className="Main">

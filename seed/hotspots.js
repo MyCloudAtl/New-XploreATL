@@ -35,7 +35,7 @@ const main = async () => {
         website: 'https://atlantabg.org/',
         operation_hours: 'MORNINGSIDE: Monday - Saturday: 7am - 8pm, Sunday: 9am - 4pm, PHIPPS (North Fulton Branch): Monday - Friday 7am - 7pm, Saturday: 8am - 7pm, Sunday: 9am - 4pm',
         price_range: '$$-$$$',
-        description: 'The Atlanta Botanical Garden is a 30 acres botanical garden located adjacent to Piedmont Park in Midtown Atlanta, Georgia, United States. Incorporated in 1976, the gardens mission is to "develop and maintain plant collections for the purposes of display, education, conservation, research and enjoyment.',
+        description: 'The Atlanta Botanical Garden is a 30 acres botanical garden located adjacent to Piedmont Park in Midtown Atlanta, Georgia, United States. Incorporated in 1976, the gardens mission is to "develop and maintain plant collections for the purposes of display, education, conservation, research and enjoyment."',
       },
       {
         location_id: location[0]._id,
@@ -94,7 +94,7 @@ const main = async () => {
         phone_number: '(404) 900-7900',
         website: 'https://poncecitymarket.com/',
         operation_hours: 'Monday - Saturday: 10am - 9pm, Sunday: 11am - 8pm',
-        price_range: 'Eateries and Shops range: $$-$$$',
+        price_range: '$$-$$$',
         description: 'Vibrant converted historic Sears building, now a market with a food hall, shops & living space.',
       },
       {

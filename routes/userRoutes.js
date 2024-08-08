@@ -9,7 +9,7 @@ router.put('/:id', userController.updateUser)
 router.delete('/:id', userController.deleteUser)
 router.post('/:userId/likeEatery/:eateryId', userController.likeEatery)
 router.post('/:userId/unlikeEatery/:eateryId', userController.unlikeEatery)
-router.post('/users/:userId/likeHotspot/:hotspotId', userController.likeHotspot)
-router.post('/users/:userId/unlikeHotspot/:hotspotId', userController.unlikeHotspot)
+router.post('/:userId/likeHotspot/:hotspotId', userController.likeHotspot)
+router.post('/:userId/unlikeHotspot/:hotspotId', userController.unlikeHotspot)
 
 module.exports = router
